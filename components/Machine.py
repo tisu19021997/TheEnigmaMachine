@@ -1,30 +1,27 @@
 class Machine:
     def __init__(self):
-        self.rotors = None
-        # Rightmost rotor is the first rotor and the opposite for the leftmost one.
-        # TODO: consider deleting the rightmost pointer
+        # The rightmost rotor is the first rotor and the leftmost is the last one.
         self.rightmost_rotor = None
         self.leftmost_rotor = None
         self.plugboard = None
         self.reflector = None
 
-    def _add_rotor(self, new_rotor):
-        if not self.rotors:
-            self.rotors = new_rotor
+    def __append_rotor(self, new_rotor):
+        if not self.rightmost_rotor:
             # Set both head and tail to new rotor if the linked-list is empty.
             self.rightmost_rotor = new_rotor
             self.leftmost_rotor = new_rotor
-            return self
+            return
 
         # Append new one and create link between the tail and the new rotor.
         self.leftmost_rotor.next = new_rotor
         new_rotor.prev = self.leftmost_rotor
         self.leftmost_rotor = new_rotor
-
-        return self
+        return
 
     def add_rotor(self, rotor):
-        return self._add_rotor(rotor)
+        self.__append_rotor(rotor)
+        return self
 
     def add_plugboard(self, plugboard):
         self.plugboard = plugboard
@@ -36,7 +33,7 @@ class Machine:
 
     def feed_forward(self, char, verbose=1):
         output = char
-        rotor = self.rotors
+        rotor = self.rightmost_rotor
 
         while rotor:
             output = rotor.forward(output, verbose)
@@ -55,16 +52,16 @@ class Machine:
         return output
 
     def encipher(self, message, verbose=0):
-        assert self.rotors is not None, 'No rotors found.'
+        assert self.rightmost_rotor is not None, 'No rotors found.'
         encoded_message = ''
 
         for char in message:
             # If a plugboard is set up, swap the character.
             if self.plugboard:
-                char = self.plugboard.swap(char)
+                char = self.plugboard.swap(char, verbose)
 
             # The rightmost rotor takes a single step.
-            self.rotors.step(verbose)
+            self.rightmost_rotor.step(verbose)
 
             # Forward flow.
             right_to_left = self.feed_forward(char, verbose)
@@ -78,7 +75,7 @@ class Machine:
 
             # Swap again before outputting the result.
             if self.plugboard:
-                left_to_right = self.plugboard.swap(left_to_right)
+                left_to_right = self.plugboard.swap(left_to_right, verbose)
 
             encoded_message += left_to_right
 

@@ -4,9 +4,7 @@ from constants.alphabet import alphabet
 class PlugBoard:
     def __init__(self, pairs):
         self.pairs = []
-
-        for pair in pairs:
-            self.add_pair(pair)
+        self.set(pairs)
 
     def __validate_char(self, char):
         assert char not in self.pairs, f'Plugboard got duplicate character "{char}".'
@@ -15,14 +13,27 @@ class PlugBoard:
     def __validate_connection_pair(self, pair):
         assert len(pair) <= 2, f'Expected each pair to have 2 characters, got {len(pair)}.'
 
-    def __add_pair(self, pair):
+    def __add(self, pair):
         self.__validate_connection_pair(pair)
+        print(pair)
         for char in pair:
             self.__validate_char(char)
             self.pairs.append(char)
 
-    def add_pair(self, pair):
-        self.__add_pair(pair)
+    def __set(self, pairs):
+        # If pairs has already been set, empty it
+        if len(self.pairs) > 0:
+            self.pairs = []
+
+        for pair in pairs:
+            self.__add(pair)
+
+    def add(self, pair):
+        self.__add(pair)
+        return self
+
+    def set(self, pair):
+        self.__set(pair)
         return self
 
     def swap(self, char, verbose=1):

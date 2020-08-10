@@ -8,8 +8,8 @@ def alpha_shift(char, num_shifts):
 class Scrambler:
     def __init__(self, flow, name, offset=0):
         self.flow = flow
-        self.offset = offset
         self.name = name
+        self.offset = offset
 
     def forward(self, char, verbose=1):
         encoded = self.flow[(alphabet.index(char) + self.offset) % len(alphabet)]

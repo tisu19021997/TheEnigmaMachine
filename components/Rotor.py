@@ -15,7 +15,15 @@ class Rotor(Scrambler):
         self.next = None
         self.prev = None
 
+    def set_ring(self, amount):
+        # Basically, ring setting is the opposite of offset setting.
+        return self.set_offset(-amount)
+
+    def set_offset(self, amount):
+        self.offset = amount % len(alphabet)
+
     def step(self, verbose=1):
+        # self.set_offset(self.offset + 1)
         self.offset = (self.offset + 1) % len(alphabet)
 
         if verbose:

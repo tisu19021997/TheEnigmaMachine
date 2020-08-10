@@ -11,9 +11,13 @@ if __name__ == '__main__':
     rotor_1 = Rotor('rotor_i', 'Rotor I')
     rotor_2 = Rotor('rotor_ii', 'Rotor II')
     rotor_3 = Rotor('rotor_iii', 'Rotor III')
-    reflector_b = Scrambler(models['reflector_b'], name='Reflector B')
-    plugboard = PlugBoard(['AB', 'CD', 'EF', 'GH', 'IJ', 'KL', 'MN', 'OP', 'QR', 'ST', 'UV', 'WX', 'YZ'])
-    print(plugboard.pairs)
+    rotor_1.set_ring(25)
+    rotor_2.set_ring(1)
+    rotor_3.set_ring(1)
+
+    reflector_b = Scrambler(models['reflector_b']['flow'], name='Reflector B')
+    plugboard = PlugBoard([])
+
     machine = Machine()
     machine.add_rotor(rotor_1).add_rotor(rotor_2).add_rotor(rotor_3)
     machine.add_reflector(reflector_b).add_plugboard(plugboard)
@@ -21,11 +25,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('enci', help='encipher the message using The Enigma Machine')
     parser.add_argument('-v', '--verbose', help='whether to print the enciphering flow of the machine',
-                        action='store_false')
+                        action='store_true')
     args = parser.parse_args()
     message = args.enci.replace(' ', '').upper()
     verbose = args.verbose
-    print(verbose)
+
     enciphered = machine.encipher(message, verbose)
 
     # assert enciphered == 'wts'.replace(' ', '').upper()

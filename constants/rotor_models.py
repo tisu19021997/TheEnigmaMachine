@@ -1,7 +1,7 @@
 models = {
-    'reflector_a': 'EJMZALYXVBWFCRQUONTSPIKHGD',
-    'reflector_b': 'YRUHQSLDPXNGOKMIEBFZCWVJAT',
-    'reflector_c': 'FVPJIAOYEDRZXWGCTKUQSBNMHL',
+    'reflector_a': {'flow': 'EJMZALYXVBWFCRQUONTSPIKHGD'},
+    'reflector_b': {'flow': 'YRUHQSLDPXNGOKMIEBFZCWVJAT'},
+    'reflector_c': {'flow': 'FVPJIAOYEDRZXWGCTKUQSBNMHL'},
     'rotor_i': {
         'flow': 'EKMFLGDQVZNTOWYHXUSPAIBRCJ',
         'notch': ['R'],
@@ -15,7 +15,7 @@ models = {
         'notch': ['W'],
     },
     'rotor_iv': {
-        'flow': 'JPGVOUMFYQBENHZRDKASXLICTW',
+        'flow': 'ESOVPZJAYQUIRHXLNFTGKDCMWB',
         'notch': ['K'],
     },
     'rotor_v': {
