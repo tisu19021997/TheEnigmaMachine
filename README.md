@@ -2,8 +2,8 @@
 # Workflow
   - Basic configuration: `Reflector` - `Rotor 3` - `Rotor 2` - `Rotor 1` - `Plugboard`, the character that need to be enciphered flows from right to left.
   - Two main process:
-    1. **Foward**: rightmost to leftmost,
-    2. **Backward**: leftmost to rightmost. 
+    1. **Foward**: character flows from the rightmost rotor to the leftmost one.
+    2. **Backward**: character flows from the leftmost rotor to the rightmost one. 
   - When a character enters the machine, The `Plugboard` `swap()` the character to another one based on its setting.
   - The character then enters the machine and the forwarding process starts (*from right to left*).
   - There are 3 rules for each time a character enters the machine:
@@ -17,14 +17,14 @@
 # Components
 
 ## `Scrambler`
-Basically, a `Scrambler` is capable of encoding a character and forwarding it (right to left) as well as decoding and "backwarding" it (left to right).  
+Basically, a `Scrambler` is capable of encrypting a character and forwarding it (right to left) as well as decrypting and "backwarding" it (left to right).  
 ### 1. Attributes
 - `flow`: each scrambler has different "dictionary" which it uses to translate one character to another.
 - `offset`: some scrambler like `Rotor` is able to step, so the translation will be changed. Taking the offset into account ensures the correctness of the translation.
 - `name`: helpful for printing. 
 ### 2. Methods
-  - `foward(char, verbose=1)`: Forward encoding a character using the `flow`. Returns the encoded character.
-  - `backward(char, verbose=1)` Backward encoding a character using the `flow`. Return the encoded character.
+  - `foward(char, verbose=1)`: Forward encrypting a character using the `flow`. Returns the encrypted character.
+  - `backward(char, verbose=1)` Backward encrypting a character using the `flow`. Return the encrypted character.
 
 
 ## `Rotor`
