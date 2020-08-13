@@ -53,7 +53,7 @@ class Machine:
 
     def encipher(self, message, verbose=0):
         assert self.rightmost_rotor is not None, 'No rotors found.'
-        encoded_message = ''
+        encrypted_message = ''
 
         for char in message:
             # If a plugboard is set up, swap the character.
@@ -77,6 +77,6 @@ class Machine:
             if self.plugboard:
                 left_to_right = self.plugboard.swap(left_to_right, verbose)
 
-            encoded_message += left_to_right
+            encrypted_message += left_to_right
 
-        return encoded_message
+        return encrypted_message

@@ -12,18 +12,18 @@ class Scrambler:
         self.offset = offset
 
     def forward(self, char, verbose=1):
-        encoded = self.flow[(alphabet.index(char) + self.offset) % len(alphabet)]
+        encrypted = self.flow[(alphabet.index(char) + self.offset) % len(alphabet)]
 
         if verbose:
-            print(f'[{self.name}] Fw: {char} => {alphabet[alpha_shift(encoded, -self.offset)]}')
+            print(f'[{self.name}] Fw: {char} => {alphabet[alpha_shift(encrypted, -self.offset)]}')
 
-        return alphabet[alpha_shift(encoded, -self.offset)]
+        return alphabet[alpha_shift(encrypted, -self.offset)]
 
     def backward(self, char, verbose=1):
         shifted = alphabet[alpha_shift(char, self.offset)]
-        decoded = alphabet[self.flow.index(shifted) - self.offset]
+        encrypted = alphabet[self.flow.index(shifted) - self.offset]
 
         if verbose:
-            print(f'[{self.name}] Bw: {char} => {decoded}')
+            print(f'[{self.name}] Bw: {char} => {encrypted}')
 
-        return decoded
+        return encrypted
