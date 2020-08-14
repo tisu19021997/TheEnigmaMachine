@@ -9,6 +9,7 @@ class Keyboard(Group):
     def __init__(self, key_path):
         super().__init__()
         self.rows = Group()
+        self.last_pressed = None
 
         key_folders = sorted(listdir(key_path))
         start_pos = math.Vector2(PADDING, PADDING)
@@ -40,4 +41,12 @@ class Keyboard(Group):
         mouse_pos = mouse.get_pos()
         for key in self.sprites():
             if key.rect.collidepoint(mouse_pos):
-                key.pressed_down()
+                self.last_pressed = key
+                key.update_state(pressed=True)
+                return key.key
+        return False
+
+    def pressed_up(self):
+        if not self.last_pressed:
+            return False
+        self.last_pressed.update_state(pressed=False)

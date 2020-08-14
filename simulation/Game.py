@@ -1,7 +1,7 @@
 import pygame
 import sys
-from pygame.sprite import Group
 from simulation.Keyboard import Keyboard
+from simulation.Output import Output
 from constants.game import SCREEN, BLACK, KEYBOARD_PATH
 
 
@@ -11,6 +11,7 @@ class Game:
         self.screen = pygame.display.set_mode(size)
         self.background = background
         self.keyboard = Keyboard(key_path=KEYBOARD_PATH)
+        self.output = Output()
 
         pygame.display.set_caption(title)
 
@@ -22,7 +23,7 @@ class Game:
     def draw(self):
         self.screen.fill(self.background)
         self.keyboard.draw(self.screen)
-
+        self.output.render(self.screen)
         pygame.display.flip()
 
     def handle_event(self, event):
@@ -31,7 +32,12 @@ class Game:
             pygame.quit()
             sys.exit()
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            self.keyboard.pressed_down()
+            key = self.keyboard.pressed_down()
+            if key:
+                # TODO: Get output from machine
+                self.output.add(key)
+        elif event.type == pygame.MOUSEBUTTONUP:
+            self.keyboard.pressed_up()
 
     def loop(self):
         while self.run:
