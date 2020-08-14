@@ -30,6 +30,8 @@ class Game:
             self.run = False
             pygame.quit()
             sys.exit()
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            self.keyboard.pressed_down()
 
     def loop(self):
         while self.run:
