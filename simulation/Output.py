@@ -1,6 +1,6 @@
 import pygame
-import os
-from constants.game import BLACK, WHITE
+from constants.game import BLACK, WHITE, FONT_PATH
+from simulation.Typography import Typography
 
 
 class Output:
@@ -10,10 +10,9 @@ class Output:
     def add(self, character):
         self.text += character
 
-    def render(self, screen):
+    def draw(self, screen):
         screen_rect = screen.get_rect().center
-        font_file = os.path.join(os.path.abspath(os.getcwd()), 'assets/fonts/Pixeboy-z8XGD.ttf')
-        font = pygame.font.Font(font_file, 32)
+        font = Typography(FONT_PATH, 32)
         text = font.render(self.text, True, WHITE)
 
         text_rect = text.get_rect(center=(screen_rect[0], screen_rect[1] + 25))

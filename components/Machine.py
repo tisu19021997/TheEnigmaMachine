@@ -1,3 +1,6 @@
+from helper.string import sanitize_message
+
+
 class Machine:
     def __init__(self):
         # The rightmost rotor is the first rotor and the leftmost is the last one.
@@ -53,8 +56,9 @@ class Machine:
 
     def encipher(self, message, verbose=0):
         assert self.rightmost_rotor is not None, 'No rotors found.'
-        encrypted_message = ''
 
+        message = sanitize_message(message)
+        encrypted_message = ''
         for char in message:
             # If a plugboard is set up, swap the character.
             if self.plugboard:

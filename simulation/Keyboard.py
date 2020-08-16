@@ -12,7 +12,7 @@ class Keyboard(Group):
         self.last_pressed = None
 
         key_folders = sorted(listdir(key_path))
-        start_pos = math.Vector2(PADDING, PADDING)
+        start_pos = math.Vector2(PADDING, PADDING*3)
 
         for key_folder in key_folders:
             key_names = sorted(listdir(path.join(key_path, key_folder)))
