@@ -32,13 +32,22 @@ Basically, a `Scrambler` is capable of encrypting a character and forwarding it 
 Each `Rotor` is a node of a linked-list of rotors in the machine. For further information about the rotor, refer [here][Rotor].
 ### 1. Attributes
   - `model`: Each rotor's model will come with different `notches` and `flow`. See the full list of rotor types [here][Rotor types].
-    * `notches`: When a rotor past a `notch`, not only that router shift, but also its neighbour rotor. 
+    * `notches`: When a rotor pass a `notch`, not only that router shifts, but also its neighbour rotor. 
     * `flow`: see `Scrambler.flow`.
-  - `next`: The next `Rotor` in the machine.
-  - `prev`: The previous `Rotor` in the machine.
+  - `next`: The next `Rotor` in the machine. Default to `None`
+  - `prev`: The previous `Rotor` in the machine. Default to `None`
 
 ### 2. Methods
   - `step()`: increase the `offset` by `1`. Trigger the `next.step()` when the rotor is positioned at its notch (known as [turn-over][Rotor types]).
 
 [Rotor types]: https://en.wikipedia.org/wiki/Enigma_rotor_details#Turnover_notch_positions
 [Rotor]: http://users.telenet.be/d.rijmenants/en/enigmatech.htm#rotors
+
+---
+## TODO
+- [ ] Reset state of the machine
+- [ ] Plugboard visualization
+- [ ] Changable rotor settings
+- [ ] Start game interface
+- [ ] Model picking interface 
+- [ ] Turing machine implementation and visualization
